@@ -66,7 +66,7 @@ function addButon() {
 function addNavBarBtn(index) {
   const aLink = document.createElement("a");
   aLink.id = `alink_${index}`;
-  aLink.innerHTML = `Section No ${index}`;
+  aLink.innerHTML = `Sec # ${index}`;
   aLink.href = `#section_${index}`;
   aLink.className = "menu__link";
 
