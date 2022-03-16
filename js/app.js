@@ -88,7 +88,7 @@ function addSection(index) {
   const myDiv= document.createElement("div");
   
   mySection.id = `section_${index}`;
-  //myDiv.style.class ="landing__container"
+  myDiv.style.class ="landing__container"
   
   
   const myHeading = document.createElement("h2");
