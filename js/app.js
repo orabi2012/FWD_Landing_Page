@@ -100,7 +100,7 @@ function addSection(index) {
 
     const myImg = document.createElement('img');
 
-    myImg.src = `/img/${index}.png`
+    myImg.src = `./img/${index}.png`
 
     myParag1.innerHTML = ` this section created dynamically using Js Code learned with Udacity `
     myParag2.innerHTML = ` just another pragraph at section ${index} `
