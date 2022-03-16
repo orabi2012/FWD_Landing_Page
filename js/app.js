@@ -29,11 +29,15 @@ let activeSectionTag = 0 ;
 
 let myNavBar = document.getElementsByTagName("nav")[0];
 
+let myHeader = document.getElementsByTagName("header")[0];
+
 const myUl = document.createElement("ul");
 const myBtnAdd = document.createElement("button");
 const myBtnRemove = document.createElement("button");
 
 const mymain = document.getElementsByTagName("main")[0];
+
+let isScrolling;
 
 /**
  * End Global Variables
@@ -270,6 +274,24 @@ function setActiveSection(index) {
 
 window.addEventListener ('scroll' , function () {
 
+
+  window.clearTimeout( isScrolling );
+
+  myHeader.style.display = "block";
+
+
+  isScrolling = setTimeout(function() {
+
+		// Run the callback
+		console.log( 'Scrolling has stopped.' );
+
+    myHeader.style.display = "none";
+
+
+
+	}, 2000);
+
+
   let allSections = this.document.querySelectorAll('section');
 
 
@@ -336,7 +358,7 @@ link.classList.add("activeList") ;
   
 }
     
-)
+, false)
 
 
 
