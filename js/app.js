@@ -42,13 +42,13 @@ const mymain = document.getElementsByTagName('main')[0];
  */
 // add button to nab menu will used to add sections and navBar buttons
 function addButon() {
-  myBtnAdd.innerHTML = `Add  (${Counter} of 10 )`;
+  myBtnAdd.innerHTML = `Add Section  (${Counter} of 10 )`;
 
   myBtnAdd.classList.add("button", "buttonAdd");
 
   myNavBar.appendChild(myBtnAdd);
 
-  myBtnRemove.innerHTML = "Remove -";
+  myBtnRemove.innerHTML = `Remove section ${Counter}`;
 
   myBtnRemove.classList.add("button", "buttonRemove");
 
@@ -157,7 +157,8 @@ myBtnAdd.addEventListener("click", function () {
     addNavBarBtn(Counter);
 
     addSection(Counter) ;
-    myBtnAdd.innerHTML = `Add  (${Counter} of 10 )`;
+    myBtnAdd.innerHTML = `Add Section  (${Counter} of 10 )`;
+    myBtnRemove.innerHTML = `Remove section ${Counter}`;
 
     CheckCounter();
   }
@@ -183,6 +184,7 @@ myBtnRemove.addEventListener("click", function () {
   removeNavBarBtn();
 
   myBtnAdd.innerHTML = `Add  (${Counter} of 10 )`;
+  myBtnRemove.innerHTML = `Remove section ${Counter}`;
 
   console.log(Counter);
 
