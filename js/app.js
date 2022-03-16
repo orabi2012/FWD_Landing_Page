@@ -25,6 +25,8 @@
 
 let Counter = 0;
 
+let activeSectionTag = 0 ;
+
 let myNavBar = document.getElementsByTagName("nav")[0];
 
 const myUl = document.createElement("ul");
@@ -61,32 +63,6 @@ function addButon() {
 
 // build the nav
 
-function addNavBarBtn(index) {
-  const aLink = document.createElement("a");
-  aLink.id = `alink_${index}`;
-  aLink.innerHTML = `Sec #${index}`;
-  aLink.href = `#section_${index}`;
-  aLink.className = "menu__link";
-
-  const myLi = document.createElement("li");
-  myLi.id = `li_${index}`;
-
-  myLi.appendChild(aLink);
-  myUl.appendChild(myLi);
-
-  myNavBar.appendChild(myUl);
-
-  aLink.addEventListener("click", function ( event) {
-
-    event.preventDefault();
-
-    console.log("my index = " + index);
-    setActiveLink(index);
-    setActiveSection(index);
-
-    smoothScroll(index) ;
-  });
-}
 
 function addSection(index) {
   const mySection = document.createElement("section");
@@ -94,6 +70,8 @@ function addSection(index) {
   const myDiv = document.createElement("div");
 
   mySection.id = `section_${index}`;
+
+  mySection.setAttribute('Tag' , index)
   myDiv.style.class = "landing__container";
 
   const myHeading = document.createElement("h2");
@@ -116,6 +94,9 @@ function addSection(index) {
   mySection.appendChild(myImg);
 
   mymain.appendChild(mySection);
+
+
+  
 }
 
 function removeNavBarBtn() {
@@ -131,35 +112,45 @@ function removeNavBarBtn() {
 }
 
 function setActiveLink(index) {
-  const allLinks = document.querySelectorAll(".menu__link");
-  console.log(allLinks);
 
-  for (let index = 0; index < allLinks.length - 1; index++) {
-    allLinks[index].classList.remove("activeList");
+
+  //console.log(`index = ${index}`)
+
+  const allLinks = document.querySelectorAll("a");
+  //console.log(allLinks);
+
+  for (let i = 0; i <= allLinks.length-1 ; i++) {
+
+    allLinks[i].classList.remove("activeList");
+
+
+    if ( index === i+1 ){
+
+       console.log(`allLinks = ${index}`)
+      allLinks[i].classList.add("activeList");
+
+    }
   }
 
-  const activeLink = document.getElementById(`alink_${index}`);
 
-  activeLink.classList.add("activeList");
+  
+
+  
 }
 
-function setActiveSection(index) {
-  const allSections = document.querySelectorAll("section");
-  console.log(allSections);
 
-  for (let index = 0; index < allSections.length - 1; index++) {
-    allSections[index].classList.remove("activeList");
-  }
 
-  const activeSection = document.getElementById(`section_${index}`);
 
-  activeSection.classList.add("activeList");
-}
 
 // Add class 'active' to section when near top of viewport
 
 // Scroll to anchor ID using scrollTO event
-
+function smoothScroll(secId){
+  //console.log(`#section_${secId}`);
+  document.querySelector(`#section_${secId}`).scrollIntoView({
+      behavior: 'smooth'
+  });
+}
 /**
  * End Main Functions
  * Begin Events
@@ -170,7 +161,7 @@ function setActiveSection(index) {
 window.addEventListener("DOMContentLoaded", (event) => {
   addButon();
 
-  console.log("add button");
+//  console.log ("add button");
   myBtnRemove.style.visibility = "hidden";
   myBtnAdd.style.visibility = "visible";
 });
@@ -210,21 +201,143 @@ myBtnRemove.addEventListener("click", function () {
   myBtnAdd.innerHTML = `Add  (${Counter} of 10 )`;
   myBtnRemove.innerHTML = `Remove section ${Counter}`;
 
-  console.log(Counter);
+  // console.log(Counter);
 
   CheckCounter();
 });
 
 // Build menu
 
-// Scroll to section on link click
 
-function smoothScroll(secId){
-  console.log(`#section_${secId}`);
-  document.querySelector(`#section_${secId}`).scrollIntoView({
-      behavior: 'smooth'
+
+function addNavBarBtn(index) {
+  const aLink = document.createElement("a");
+  aLink.id = `alink_${index}`;
+  aLink.innerHTML = `Sec #${index}`;
+  aLink.href = `#section_${index}`;
+  aLink.className = "menu__link";
+
+  aLink.setAttribute('Tag' , index)
+
+  const myLi = document.createElement("li");
+  myLi.id = `li_${index}`;
+
+  myLi.appendChild(aLink);
+  myUl.appendChild(myLi);
+
+  myNavBar.appendChild(myUl);
+
+  // Scroll to section on link click
+  
+
+  aLink.addEventListener("click", function ( event) {
+
+    event.preventDefault();
+
+    console.log("addEventListener my index = " + index);
+    setActiveLink(index);
+    setActiveSection(index);
+
+    smoothScroll(index) ;
   });
 }
 
 
 // Set sections as active
+function setActiveSection(index) {
+  
+
+  const allSections = document.querySelectorAll("section");
+  //console.log(allLinks);
+
+  for (let i = 0; i <= allSections.length-1 ; i++) {
+
+    allSections[i].classList.remove("activeList");
+
+
+    if ( index === i+1 ){
+
+       console.log(`allSections = ${index}`)
+       allSections[i].classList.add("activeList");
+
+    }
+  }
+
+  
+}
+
+
+
+window.addEventListener ('scroll' , function () {
+
+  let allSections = this.document.querySelectorAll('section');
+
+
+  //console.log(allSections)
+  allSections.forEach (function (section , i ){
+
+const sectionBound = section.getBoundingClientRect()
+
+
+
+section.classList.remove("activeList");
+
+
+
+
+if( sectionBound.top >= 0 && sectionBound.top < (200)  ){
+
+  const sTag = section.getAttribute('Tag')
+
+//console.log (`index = ${i}`)
+//console.log(`sectionTop = ${sectionBound.top} -Bottom  ${sectionBound.bottom}  index = ${i }` )
+
+// console.log(section.getAttribute('id'))
+section.classList.add("activeList");
+
+activeSectionTag = sTag;
+
+console.log( `activeSectionTag ${activeSectionTag}`);
+
+// console.log(`activeSectionTag = ${activeSectionTag}`)
+
+// setActiveLink(activeSectionTag)
+
+const links = document.querySelectorAll('a');
+
+links.forEach( function( link , i){
+
+link.classList.remove("activeList") ;
+
+if(link.getAttribute("Tag") === section.getAttribute("Tag")){
+
+link.classList.add("activeList") ;
+
+}
+
+}  )
+
+
+
+  //activeLink.classList.add("activeList");
+
+
+
+  //setActiveLink(i +1)
+  //setActiveSection (i +1)
+
+}else{
+  section.classList.remove("activeList");
+
+}
+
+  })
+
+  
+}
+    
+)
+
+
+
+
