@@ -83,6 +83,8 @@ function addNavBarBtn(index) {
     console.log("my index = " + index);
     setActiveLink(index);
     setActiveSection(index);
+
+    smoothScroll(index) ;
   });
 }
 
@@ -216,5 +218,13 @@ myBtnRemove.addEventListener("click", function () {
 // Build menu
 
 // Scroll to section on link click
+
+function smoothScroll(secId){
+  console.log(`#section_${secId}`);
+  document.querySelector(`#section_${secId}`).scrollIntoView({
+      behavior: 'smooth'
+  });
+}
+
 
 // Set sections as active
