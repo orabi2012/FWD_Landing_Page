@@ -98,6 +98,14 @@ section {
 
 }
 
+.activeList {
+  background: blue;
+  color: white;
+  font-weight: bold;
+  border: solid red;
+  transition: ease 0.3s all;
+}
+
 .navbar__menu .menu__link {
     display: block;
     color: white;
@@ -113,6 +121,9 @@ section {
   border: solid red;
   transition: ease 0.3s all;
 }
+
+
+
 
 /* Header Styles */
 .page__header {
@@ -284,3 +295,5 @@ nav .buttonRemove {
 
   color: yellow;
 }
+
+

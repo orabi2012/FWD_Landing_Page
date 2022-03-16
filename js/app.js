@@ -31,9 +31,7 @@ const myUl = document.createElement("ul");
 const myBtnAdd = document.createElement("button");
 const myBtnRemove = document.createElement("button");
 
-
-const mymain = document.getElementsByTagName('main')[0];
-
+const mymain = document.getElementsByTagName("main")[0];
 
 /**
  * End Global Variables
@@ -77,47 +75,43 @@ function addNavBarBtn(index) {
   myUl.appendChild(myLi);
 
   myNavBar.appendChild(myUl);
+
+  aLink.addEventListener("click", function () {
+    console.log("my index = " + index);
+    setActiveLink(index);
+    setActiveSection(index);
+  });
 }
 
-
-
 function addSection(index) {
+  const mySection = document.createElement("section");
 
-  const mySection = document.createElement('section');
+  const myDiv = document.createElement("div");
 
-  const myDiv= document.createElement("div");
-  
   mySection.id = `section_${index}`;
-  myDiv.style.class ="landing__container"
-  
-  
+  myDiv.style.class = "landing__container";
+
   const myHeading = document.createElement("h2");
-  myHeading.innerHTML= `Section No ${index}`;
-  
-    const myParag1 = document.createElement('p');
-    const myParag2 = document.createElement('p');
+  myHeading.innerHTML = `Section No ${index}`;
 
+  const myParag1 = document.createElement("p");
+  const myParag2 = document.createElement("p");
 
-    const myImg = document.createElement('img');
+  const myImg = document.createElement("img");
 
-    myImg.src = `./img/${index}.png`
+  myImg.src = `./img/${index}.png`;
 
-    myParag1.innerHTML = ` this section created dynamically using Js Code learned with Udacity `
-    myParag2.innerHTML = ` just another pragraph at section ${index} `
-  
-myDiv.appendChild(myHeading);
-myDiv.appendChild(myParag1);
-myDiv.appendChild(myParag2);
-mySection.appendChild(myDiv)
-mySection.appendChild(myImg)
+  myParag1.innerHTML = ` this section created dynamically using Js Code learned with Udacity `;
+  myParag2.innerHTML = ` just another pragraph at section ${index} `;
 
-mymain.appendChild(mySection)
+  myDiv.appendChild(myHeading);
+  myDiv.appendChild(myParag1);
+  myDiv.appendChild(myParag2);
+  mySection.appendChild(myDiv);
+  mySection.appendChild(myImg);
 
-
-    
-    
-  }
-
+  mymain.appendChild(mySection);
+}
 
 function removeNavBarBtn() {
   //let elementToRemove = document.getElementById(`li_${Counter}`)
@@ -127,9 +121,34 @@ function removeNavBarBtn() {
     let sectionToRemove = document.getElementById(`section_${Counter}`);
     sectionToRemove.remove();
 
-
     Counter -= 1;
   }
+}
+
+function setActiveLink(index) {
+  const allLinks = document.querySelectorAll(".menu__link");
+  console.log(allLinks);
+
+  for (let index = 0; index < allLinks.length - 1; index++) {
+    allLinks[index].classList.remove("activeList");
+  }
+
+  const activeLink = document.getElementById(`alink_${index}`);
+
+  activeLink.classList.add("activeList");
+}
+
+function setActiveSection(index) {
+  const allSections = document.querySelectorAll("section");
+  console.log(allSections);
+
+  for (let index = 0; index < allSections.length - 1; index++) {
+    allSections[index].classList.remove("activeList");
+  }
+
+  const activeSection = document.getElementById(`section_${index}`);
+
+  activeSection.classList.add("activeList");
 }
 
 // Add class 'active' to section when near top of viewport
@@ -156,7 +175,7 @@ myBtnAdd.addEventListener("click", function () {
     Counter += 1;
     addNavBarBtn(Counter);
 
-    addSection(Counter) ;
+    addSection(Counter);
     myBtnAdd.innerHTML = `Add Section  (${Counter} of 10 )`;
     myBtnRemove.innerHTML = `Remove section ${Counter}`;
 
