@@ -76,7 +76,10 @@ function addNavBarBtn(index) {
 
   myNavBar.appendChild(myUl);
 
-  aLink.addEventListener("click", function () {
+  aLink.addEventListener("click", function ( event) {
+
+    event.preventDefault();
+
     console.log("my index = " + index);
     setActiveLink(index);
     setActiveSection(index);
