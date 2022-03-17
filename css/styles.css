@@ -273,5 +273,5 @@ nav .button {
     float: left;
     width:  25%;
     height: 25%;
-    object-fit: cover;
+    object-fit: contain;
 }
