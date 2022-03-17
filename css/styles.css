@@ -267,3 +267,10 @@ nav .button {
     /* border: solid red; */
     /* transition: ease 0.3s all; */
   }
+
+  img {
+    float: left;
+    width:  25%;
+    height: 25%;
+    object-fit: cover;
+}
