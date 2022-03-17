@@ -71,7 +71,6 @@ function addButtons() {
   myNavBar.appendChild(myBtnRemove);
 }
 
-
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -133,12 +132,7 @@ function setActiveLink(index) {
   }
 }
 
-
-
-
-
 // Scroll to anchor ID using scrollTO event
-
 
 window.addEventListener(
   "scroll",
@@ -191,7 +185,6 @@ window.addEventListener(
   false
 );
 
-
 function smoothScroll(secId) {
   let s = document.querySelector(`#section_${secId}`);
 
@@ -204,7 +197,6 @@ function smoothScroll(secId) {
  * Begin Events
  *
  */
-
 
 myBtnAdd.addEventListener("click", function () {
   if (_counter === 0 || _counter < 10) {
@@ -288,16 +280,14 @@ function setActiveSection(index) {
   }
 }
 
-
 // at page load events
 window.addEventListener("DOMContentLoaded", (event) => {
   addButtons();
 
-//  console.log ("add button");
+  //  console.log ("add button");
   myBtnRemove.style.visibility = "hidden";
   myBtnAdd.style.visibility = "visible";
 });
-
 
 //show-hide header with user click anywhere
 window.addEventListener(
@@ -308,18 +298,11 @@ window.addEventListener(
     myHeader.style.display = "block";
 
     isKeepScrolling = setTimeout(function () {
-     
       console.log("click has stopped.");
 
       myHeader.style.display = "none";
     }, 5000);
-
-  
   },
 
   false
 );
-
-
-
-
