@@ -133,9 +133,65 @@ function setActiveLink(index) {
   }
 }
 
-// Add class 'active' to section when near top of viewport
+
+
+
 
 // Scroll to anchor ID using scrollTO event
+
+
+window.addEventListener(
+  "scroll",
+  function () {
+    window.clearTimeout(isKeepScrolling);
+
+    myHeader.style.display = "block";
+
+    isKeepScrolling = setTimeout(function () {
+      // Run the callback
+      console.log("Scrolling has stopped.");
+
+      myHeader.style.display = "none";
+    }, 5000);
+
+    let allSections = this.document.querySelectorAll("section");
+
+    //console.log(allSections)
+    allSections.forEach(function (section, i) {
+      const sectionBound = section.getBoundingClientRect();
+
+      section.classList.remove("activeList");
+
+      // Add class 'active' to section when near top of viewport
+
+      if (sectionBound.top >= 0 && sectionBound.top < 300) {
+        const sTag = section.getAttribute("Tag");
+
+        section.classList.add("activeList");
+
+        activeSectionTag = sTag;
+
+        console.log(`activeSectionTag ${activeSectionTag}`);
+
+        const links = document.querySelectorAll("a");
+
+        links.forEach(function (link, i) {
+          link.classList.remove("activeList");
+
+          if (link.getAttribute("Tag") === section.getAttribute("Tag")) {
+            link.classList.add("activeList");
+          }
+        });
+      } else {
+        section.classList.remove("activeList");
+      }
+    });
+  },
+
+  false
+);
+
+
 function smoothScroll(secId) {
   let s = document.querySelector(`#section_${secId}`);
 
@@ -232,54 +288,6 @@ function setActiveSection(index) {
   }
 }
 
-window.addEventListener(
-  "scroll",
-  function () {
-    window.clearTimeout(isKeepScrolling);
-
-    myHeader.style.display = "block";
-
-    isKeepScrolling = setTimeout(function () {
-      // Run the callback
-      console.log("Scrolling has stopped.");
-
-      myHeader.style.display = "none";
-    }, 5000);
-
-    let allSections = this.document.querySelectorAll("section");
-
-    //console.log(allSections)
-    allSections.forEach(function (section, i) {
-      const sectionBound = section.getBoundingClientRect();
-
-      section.classList.remove("activeList");
-
-      if (sectionBound.top >= 0 && sectionBound.top < 300) {
-        const sTag = section.getAttribute("Tag");
-
-        section.classList.add("activeList");
-
-        activeSectionTag = sTag;
-
-        console.log(`activeSectionTag ${activeSectionTag}`);
-
-        const links = document.querySelectorAll("a");
-
-        links.forEach(function (link, i) {
-          link.classList.remove("activeList");
-
-          if (link.getAttribute("Tag") === section.getAttribute("Tag")) {
-            link.classList.add("activeList");
-          }
-        });
-      } else {
-        section.classList.remove("activeList");
-      }
-    });
-  },
-
-  false
-);
 
 // at page load events
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -289,3 +297,29 @@ window.addEventListener("DOMContentLoaded", (event) => {
   myBtnRemove.style.visibility = "hidden";
   myBtnAdd.style.visibility = "visible";
 });
+
+
+//show-hide header with user click anywhere
+window.addEventListener(
+  "click",
+  function () {
+    window.clearTimeout(isKeepScrolling);
+
+    myHeader.style.display = "block";
+
+    isKeepScrolling = setTimeout(function () {
+     
+      console.log("click has stopped.");
+
+      myHeader.style.display = "none";
+    }, 5000);
+
+  
+  },
+
+  false
+);
+
+
+
+
